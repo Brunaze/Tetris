@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Tetris
 {
@@ -46,8 +39,8 @@ namespace Tetris
 
         private readonly Image[,] imageControls;
         private readonly int maxDelay = 1000;
-        private readonly int minDelay = 75;
-        private readonly int delayDecrease = 25;
+        private readonly int minDelay = 100;
+        private readonly int delayDecrease = 50;
 
         private GameState gameState = new GameState();
 
@@ -144,6 +137,7 @@ namespace Tetris
             DrawNextBlock(gameState.BlockQueue);
             DrawHeldBlock(gameState.HeldBlock);
             ScoreText.Text = $"Score: {gameState.Score}";
+            LevelText.Text = $"Level: {gameState.Level}";
         }
 
         private async Task GameLoop()
@@ -152,7 +146,7 @@ namespace Tetris
 
             while (!gameState.GameOver)
             {
-                int delay = Math.Max(minDelay, maxDelay - (gameState.Score * delayDecrease));
+                int delay = Math.Max(minDelay, maxDelay - (gameState.Level * delayDecrease));
                 await Task.Delay(delay);
                 gameState.MoveBlockDown();
                 Draw(gameState);
@@ -160,6 +154,7 @@ namespace Tetris
 
             GameOverMenu.Visibility = Visibility.Visible;
             FinalScoreText.Text = $"Score: {gameState.Score}";
+            FinalClearedText.Text = $"Cleared lines: {gameState.Cleared}";
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)

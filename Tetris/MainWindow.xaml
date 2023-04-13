@@ -68,6 +68,15 @@
                    Width="125"/>
         </StackPanel>
 
+        <TextBlock x:Name="LevelText"
+                   Grid.Row="1"
+                   Grid.Column="2"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Left"
+                   Text="Level: "
+                   Margin="20, 0"
+                   TextAlignment="Center"/>
+
         <Grid x:Name="GameOverMenu"
               Background="#CC000000"
               Grid.RowSpan="2"
@@ -81,6 +90,11 @@
 
                 <TextBlock x:Name="FinalScoreText"
                            Text="Score: "
+                           FontSize="36"
+                           TextAlignment="Center"/>
+
+                <TextBlock x:Name="FinalClearedText"
+                           Text="Cleared lines: "
                            FontSize="36"
                            TextAlignment="Center"/>
 
